@@ -15,32 +15,28 @@ if [ "$1" == "--help" ]; then
   exit 0
 fi
 
-# Check for minimum arguments
-if [ "$#" -lt 2 ]; then
-  echo "Error: Missing arguments."
-  print_usage
-  exit 1
-fi
 
 # Initialize variables
 show_line_numbers=false
 invert_match=false
 
-# Process option
 
-while [[ "$1" == -* ]]; do
-  case "$1" in
-    -n) show_line_numbers=true ;;
-    -v) invert_match=true ;;
-    -vn|-nv)
-        show_line_numbers=true
-        invert_match=true
-        ;;
-    --help) print_usage; exit 0 ;;
-    *) echo "Unknown option: $1"; print_usage; exit 1 ;;
+# Use getopts to parse options
+while getopts ":nv" opt; do
+  case "$opt" in
+    n) show_line_numbers=true ;;
+    v) invert_match=true ;;
+    \?) 
+      echo "Invalid option: -$OPTARG" 
+      print_usage
+      exit 1
+      ;;
   esac
-  shift
 done
+
+# Shift the processed options
+shift $((OPTIND -1))
+
 # $1 is search string, $2 is filename
 search_string="$1"
 file="$2"
