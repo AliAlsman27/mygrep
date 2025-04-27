@@ -1,0 +1,3 @@
+From the DNS tests, I confirmed that internal.example.com cannot be resolved by public DNS and needs an internal DNS or manual /etc/hosts entry.
+From the service reachability tests, I concluded that there is no active web server responding, and even if DNS is corrected, users still will not be able to connect until the web service issue is fixed.
+
