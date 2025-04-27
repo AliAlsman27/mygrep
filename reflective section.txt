@@ -1,0 +1,20 @@
+1. How my script handles arguments and options?
+
+At the beginning, my script checks if the user asked for help by typing --help, and if yes, it just shows the usage message and exits.
+Then it checks if there are enough arguments, because the script needs at least a word to search and a file to search in.
+After that, it looks through the arguments that start with -, like -n, -v, or combined like -vn or -nv.
+If the script finds -n, it turns on line numbers, and if it finds -v, it sets the script to invert the search (show lines that don’t match).
+After finishing with the options, the script takes the search word and the filename from the arguments.
+Before it starts reading the file, it checks if the file even exists to avoid errors.
+Finally, it reads the file line by line and checks each line for the search word, and based on the options, it either prints the matching lines, the non-matching lines, and adds line numbers if needed.
+
+2. If I wanted to add regex, -i, -c, or -l options, how would my structure change?
+
+If I wanted to add regex, I would change the search to use grep -E so it can understand regular expressions.
+If I wanted to add -i, I would just add a flag for it and make grep ignore case if that flag is set.
+For -c, instead of printing every line, I would count how many matches happen and print the number at the end.
+For -l, I would stop after finding the first match and just print the filename.
+
+3.  What part of the script was hardest to implement and why?
+
+invert match part
